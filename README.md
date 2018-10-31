@@ -1,7 +1,7 @@
 Initialisatie van Tentamen Repository Bi5a-T_1819
-# Naam Student:
-## Studentnummer:
-## Klas:
+# Naam Student: Cas van Rijbroek
+## Studentnummer: 590607
+## Klas: Bi2-b
 
 ## Beoordeling Student
 | Onderdeel  | Max Score | Student | Docent |
