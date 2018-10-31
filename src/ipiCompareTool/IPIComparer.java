@@ -1,23 +1,59 @@
 package ipiCompareTool;
 
 import java.io.*;
+import java.util.Arrays;
 
 class IPIComparer {
+    private String output;
+    private String drawCode;
     private String[] fileContent1;
     private String[] fileContent2;
 
     IPIComparer(File file1, File file2) throws IOException, NotValidIPIFormat {
+        StringBuilder differences = new StringBuilder();
+        StringBuilder codeBuilder = new StringBuilder();
         fileContent1 = readFile(file1);
         fileContent2 = readFile(file2);
+        int line = 1;
 
+        for (int i=0 ; i<fileContent1.length-1 ; i+=4) {
+            if (!compare(fileContent1[i], fileContent2[i])) {
+                differences.append(String.format("Files don't match at line %03d:\nDifference in column 1, IPI: code\n", line));
+                codeBuilder.append(1);
+            } else if (!compare(fileContent1[i+1], fileContent2[i+1])) {
+                differences.append(String.format("Files don't match at line %03d:\nDifference in column 2, code\n", line));
+                codeBuilder.append(2);
+            } else if (!compare(fileContent1[i+2], fileContent2[i+2])) {
+                differences.append(String.format("Files don't match at line %03d:\nDifference in column 3, description\n", line));
+                codeBuilder.append(3);
+            } else if (!compare(fileContent1[i+3], fileContent2[i+3])) {
+                differences.append(String.format("Files don't match at line %-3d:\nDifference in column 4, size\n", line));
+                codeBuilder.append(4);
+            } else {
+                codeBuilder.append(0);
+            }
+        line++;
+        }
+
+        drawCode = codeBuilder.toString();
+
+        if (differences.toString().equals("")) {
+            output = "The files match each other at every line";
+        } else {
+            output = differences.toString();
+        }
     }
 
-    public String[] getFileContent1() {
-        return fileContent1;
+    String getOutput() {
+        return output;
     }
 
-    public String[] getFileContent2() {
-        return fileContent2;
+    String getDrawCode() {
+        return drawCode;
+    }
+
+    private boolean compare(String item1, String item2) {
+        return (item1.equals(item2));
     }
 
     private String[] readFile(File file) throws IOException, NotValidIPIFormat {

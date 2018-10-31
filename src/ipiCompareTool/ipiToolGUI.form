@@ -100,7 +100,9 @@
         <children>
           <component id="5cbec" class="javax.swing.JTextArea" binding="infoArea">
             <constraints/>
-            <properties/>
+            <properties>
+              <editable value="false"/>
+            </properties>
           </component>
         </children>
       </scrollpane>

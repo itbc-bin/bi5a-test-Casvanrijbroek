@@ -1,8 +1,10 @@
 package ipiCompareTool;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.IOException;
 
@@ -45,6 +47,8 @@ public class ipiToolGUI implements ActionListener {
                 fileText2.setText(file2.getName());
             } else if (e.getSource() == compareButton) {
                 IPIComparer comparer = new IPIComparer(file1, file2);
+                infoArea.setText(comparer.getOutput());
+                draw(comparer.getDrawCode());
             }
         } catch (NoFileSelected nfs) {
             JOptionPane.showMessageDialog(null, nfs.getMessage());
@@ -62,6 +66,38 @@ public class ipiToolGUI implements ActionListener {
             return chooseFile.getSelectedFile();
         } else {
             throw new NoFileSelected("The file selection process was canceled by the user");
+        }
+    }
+
+    private void draw(String drawCode) {
+        Graphics paper = progressPanel.getGraphics();
+        Graphics2D paper2D = (Graphics2D) paper;
+        paper.setColor(Color.BLACK);
+        paper.fillRect(0, 0, 10000, 10000);
+
+        double drawWidth = progressPanel.getWidth()/(double)drawCode.length()*1;
+        for (int i=0 ; i<drawCode.length() ; i++) {
+            if (checkColor(drawCode.charAt(i)) != Color.BLACK) {
+                paper2D.setColor(checkColor(drawCode.charAt(i)));
+                double currentLocation = progressPanel.getWidth()/(double)drawCode.length()*i;
+                paper2D.draw(new Rectangle2D.Double(currentLocation, 0.0, 1, 30.0));
+            }
+        }
+    }
+
+    private Color checkColor(char code) {
+        if (code == '0') {
+            return Color.BLACK;
+        } else if (code == '1') {
+            return Color.GREEN;
+        } else if (code == '2') {
+            return Color.CYAN;
+        } else if (code == '3') {
+            return Color.ORANGE;
+        } else if (code == '4') {
+            return Color.RED;
+        } else {
+            return Color.WHITE;
         }
     }
 }
