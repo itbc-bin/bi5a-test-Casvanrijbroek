@@ -1,7 +1,6 @@
 package ipiCompareTool;
 
 public class NotValidIPIFormat extends Exception {
-
     NotValidIPIFormat() {
         super();
     }

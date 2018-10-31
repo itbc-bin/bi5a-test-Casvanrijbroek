@@ -30,7 +30,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <editable value="false"/>
+        </properties>
       </component>
       <component id="fb751" class="javax.swing.JTextField" binding="fileText2">
         <constraints>
@@ -38,7 +40,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <editable value="false"/>
+        </properties>
       </component>
       <component id="7786f" class="javax.swing.JButton" binding="fileButton1">
         <constraints>
