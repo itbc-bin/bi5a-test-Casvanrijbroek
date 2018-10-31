@@ -71,11 +71,12 @@ public class ipiToolGUI implements ActionListener {
         paper.setColor(Color.BLACK);
         paper.fillRect(0, 0, 10000, 10000);
 
+        double drawWidth = progressPanel.getWidth()/(double)drawCode.length()*1;
         for (int i=0 ; i<drawCode.length() ; i++) {
             if (checkColor(drawCode.charAt(i)) != Color.BLACK) {
                 paper2D.setColor(checkColor(drawCode.charAt(i)));
                 double currentLocation = progressPanel.getWidth()/(double)drawCode.length()*i;
-                paper2D.draw(new Rectangle2D.Double(currentLocation, 0.0, 1, 30.0));
+                paper2D.draw(new Rectangle2D.Double(currentLocation, 0.0, drawWidth, 30.0));
             }
         }
     }
