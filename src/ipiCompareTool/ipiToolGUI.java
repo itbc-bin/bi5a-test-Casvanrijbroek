@@ -50,12 +50,8 @@ public class ipiToolGUI implements ActionListener {
                 infoArea.setText(comparer.getOutput());
                 draw(comparer.getDrawCode());
             }
-        } catch (NoFileSelected nfs) {
-            JOptionPane.showMessageDialog(null, nfs.getMessage());
-        } catch (IOException ioe) {
-            JOptionPane.showMessageDialog(null, ioe.getMessage());
-        } catch (NotValidIPIFormat nvif) {
-            JOptionPane.showMessageDialog(null, nvif.getMessage());
+        } catch (NoFileSelected | IOException | NotValidIPIFormat err) {
+            JOptionPane.showMessageDialog(null, err.getMessage());
         }
     }
 
@@ -75,7 +71,6 @@ public class ipiToolGUI implements ActionListener {
         paper.setColor(Color.BLACK);
         paper.fillRect(0, 0, 10000, 10000);
 
-        double drawWidth = progressPanel.getWidth()/(double)drawCode.length()*1;
         for (int i=0 ; i<drawCode.length() ; i++) {
             if (checkColor(drawCode.charAt(i)) != Color.BLACK) {
                 paper2D.setColor(checkColor(drawCode.charAt(i)));
